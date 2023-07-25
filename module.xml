@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+  <Document name="sscp.ZPM">
+    <Module>
+      <Name>sscp</Name>
+      <Version>0.0.1</Version>
+      <Description>description</Description>
+      <Keywords>keywords</Keywords>
+      <ExternalName>InterSystems Super Server Copy</ExternalName>
+      <Author>
+        <Person>Eduard Lebedyuk/Ron Sweeney</Person>
+        <Organization>InterSystems</Organization>
+        <CopyrightDate>2023</CopyrightDate>
+      </Author>
+      <Packaging>module</Packaging>
+      <SourcesRoot>src</SourcesRoot>
+      <Resource Name="ZMSPMIRROR.PKG"/>
+    </Module>
+  </Document>
+</Export>
