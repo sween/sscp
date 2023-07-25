@@ -157,7 +157,7 @@ Class ZMSP.SuperServer
     }
     */
 
-    ClassMethod WriteBinary(pFile, pString)
+    ClassMethod WriteBinary(pFile As %String, pString As %String)
     {
         set stream = ##class(%Stream.FileBinary).%New()
         do stream.LinkToFile(pFile)
