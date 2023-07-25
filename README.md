@@ -21,6 +21,19 @@ Set tSC = ##class(ZMSP.SuperServer).Copy("_SYSTEM:SYS@fhirwatch-pop-os:1972@%SYS
 Use stored connections instead to avoid secrets all over the place and ridiculous connection strings.
 Investigate private SSL Certificates.
 
+## Development
+Dev shampoo for the community push.
+
+```
+zpm "load /home/sween/Desktop/SSCP/sscp"
+```
+
+Then publish the package, either with or without a version increment.
+
+```
+zpm "publish {packagename}"
+```
+
 ## Authors
 
 Eduard
