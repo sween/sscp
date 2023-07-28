@@ -10,8 +10,8 @@ Dropping to $ZF, the shell, or automation tooling like Ansible is proving to cau
 You need install the ipm package on all instances and in selected namespaces you wish to connect to. The namespace is not directly important to enabling the file copy operation, but just note it does not have to be in %SYS to work.
 
 ```
-zn <Your Favorite Namespace>
-zpm "install sscp"
+zn <Your Favorite Namespace>  
+zpm "install sscp"  
 ```
 
 ## Usage
