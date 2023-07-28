@@ -41,7 +41,14 @@ Transfer and update of Globals or Classes for those things outside of mirroring 
 Getting Files into your Health Connect Cloud instance to the file system interoperability target `/connect`.  
 
 ## Configuring Auditing
-One of the benefits here of keeping this operation in house is it is now auditable, to enable auditing you can create a source and log the operation.
+One of the benefits here of keeping this operation in house is it is now auditable, to enable auditing you can create a source and log the operation. Programmatically:
+
+```objectscript
+zn "%SYS"
+set sc = ##class(Security.Events).Create("sscp","File Transfer", "ConfigurationChange","File Transfer Initiated",1)
+```
+
+Through the UI:
 
 1. Go to Management Portal -> System Administration -> Security -> Auditing -> Configure User Events
 2. Press button Create New Event
