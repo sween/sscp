@@ -62,7 +62,7 @@ Which results in something like:
 <img src="https://github.com/sween/sscp/raw/main/assets/sscp_loggedauditevent.png" alt="Logged Audit Event">
 
 Credit:
-[@Yuri.Gomes - Leveraging Audit Database]:https://community.intersystems.com/post/leveraging-audit-database
+[@Yuri.Gomes - Leveraging Audit Database](https://community.intersystems.com/post/leveraging-audit-database)
 
 ## Definitive RoadMap
 
