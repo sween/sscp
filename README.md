@@ -72,5 +72,6 @@ Credit:
 
 ## Authors
 
-Eduard
-Ron
+[@Ron.Sweeney1582](https://community.intersystems.com/user/sween-sweeney)  
+[@Eduard.Lebedyuk](https://community.intersystems.com/user/eduard-lebedyuk)  
+
