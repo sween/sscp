@@ -110,7 +110,7 @@ Class ZMSP.SuperServer
     }
 
     // This method is invoked on the source per InitiateTransfer, and "pushes" the file to the Target
-    ClassMethod Transfer(pTarget As %String, pSourceFile As %String, pTargetFile As %String) As %String
+    ClassMethod Transfer(pTarget As %String, pSourceFile As %String, pTargetFile As %String) As %Status
     {
         Set tSC = $$$OK
 
@@ -131,7 +131,7 @@ Class ZMSP.SuperServer
 
         }
 
-        Quit "Trasfer Initiated"
+        Quit tSC
     }
 
 
