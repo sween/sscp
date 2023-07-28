@@ -64,11 +64,18 @@ Which results in something like:
 Credit:
 [@Yuri.Gomes - Leveraging Audit Database](https://community.intersystems.com/post/leveraging-audit-database)
 
+
+## Is it fast?
+
+Yeah I dunno... Most of the transfers in production use are under 100MB at the moment (HSSYS out of the box is around 22MB), but the only other benchmark I can share is some stuff that was around 800MB and took about a minute and a half traversing the internet.
+
+
 ## Definitive RoadMap
 
 - [ ] Use stored connections instead to avoid secrets all over the place and ridiculous connection strings.
 - [ ] Investigate impact of the use private SSL Certificates wuth the connections.
 
+## 
 
 ## Authors
 
