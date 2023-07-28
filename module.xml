@@ -4,7 +4,7 @@
     <Module>
       <Name>sscp</Name>
       <Version>0.0.1</Version>
-      <Description>description</Description>
+      <Description>File Transfer over the InterSystems IRIS SuperServer</Description>
       <Keywords>Copy Files, Secure Copy</Keywords>
       <ExternalName>InterSystems Super Server Copy</ExternalName>
       <Author>
