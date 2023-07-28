@@ -4,6 +4,7 @@ File Transfer over the InterSystems IRIS SuperServer.
 ## Why
 Dropping to $ZF, the shell, or automation tooling like Ansible is proving to cause more problems sometimes than its worth when automating systems for post configuration for things like MIRRORING setup, certificates, and libraries across systems.  As a common practice, it would be nice to rule out "ObjectScript Native" mechanisms before resorting to doing those things outside the instance... this solution allows you to rule it out for file transfer and keep the file copy operations across instances "ObjectScript Native".
 
+<img src="https://github.com/sween/sscp/raw/main/assets/sscp_copy.gif" alt="Example Copy">
 
 ## Setup
 You need install the ipm package on all instances and in selected namespaces you wish to connect to. The namespace is not directly important to enabling the file copy operation, but just note it does not have to be in %SYS to work.
