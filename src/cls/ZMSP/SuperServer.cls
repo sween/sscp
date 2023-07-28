@@ -1,6 +1,6 @@
 Class ZMSP.SuperServer
 {
-    // username:password@host:port@namespace:file
+    // Source and Target are in the format of username:password@host:port@namespace:file
     ClassMethod Copy(pSource As %String, pTarget As %String) As %Status
     {
         Set tSC = $$$OK
@@ -20,10 +20,8 @@ Class ZMSP.SuperServer
             Set tSourceFile = $PIECE(tSourceNamespaceFile, ":", 2)
             Set tTargetFile = $PIECE(tTargetNamespaceFile, ":", 2)
 
-
             // Initiate Transfer
             Set tSC = ..InitiateTransfer(tSourceConn, pTarget, tSourceFile, tTargetFile)
-
 
         } Catch {
 
@@ -35,8 +33,8 @@ Class ZMSP.SuperServer
         Quit tSC
     }
 
-    // username:password@host:port@namespace:file
-    ClassMethod CheckConnectionString(pConnection As %String, ByRef pConn As %Net.DB.Iris) As %Status
+    // This is just a filter to see if the connection strings can be parsed.
+    ClassMethod CheckConnectionString(pConnection As %String) As %Status
     {
         Set tSC = $$$OK
         Try {
@@ -65,8 +63,8 @@ Class ZMSP.SuperServer
         Quit tSC
     }
 
-    // %Net.DB.Iris
-    ClassMethod BuildConnection(pConnection As %String, ByRef pConnection As %Net.DB.Iris) As %Status
+    // Check to see if a connection can be made and returns a %Net.DB.Iris
+    ClassMethod BuildConnection(pConnection As %String, ByRef pConn As %Net.DB.Iris) As %Status
     {
         Set tSC = $$$OK
         Try {
@@ -85,7 +83,7 @@ Class ZMSP.SuperServer
             
             set tConnection = ##class(%Net.DB.DataSource).CreateConnection(tHost, tPort, tNameSpace, tUserName, tPassword)
             set tIris = tConnection.CreateIris()
-            Set pConnection = tIris
+            Set pConn = tIris
             
 		} Catch {
             Do ##class(%SYS.System).WriteToConsoleLog("SuperServer Copy connection could not be created or established.")
@@ -95,11 +93,11 @@ Class ZMSP.SuperServer
         Quit tSC
     }
 
-    // FromSource execute Transfer on Source with a Target of Target (mirrora)
+    // This method connects to the source and grabs the paylod of the source file
     ClassMethod InitiateTransfer(pSourceConnection As %Net.DB.Iris, pTarget As %String, pSourceFile As %String, pTargetFile As %String) As %Status
     {
         Set tSC = $$$OK
-        // Run "Transfer" on "Source" with "Target"
+
         Try {
             Set tSC = pSourceConnection.ClassMethodValue("ZMSP.SuperServer", "Transfer", pTarget, pSourceFile, pTargetFile)
         }
@@ -111,19 +109,19 @@ Class ZMSP.SuperServer
         Quit tSC
     }
 
-    // to mirrorb
-    ClassMethod Transfer(pTarget As %String, pSourceFile As %String, pTargetFile As %String) As %Status
+    // This method is invoked on the source per InitiateTransfer, and "pushes" the file to the Target
+    ClassMethod Transfer(pTarget As %String, pSourceFile As %String, pTargetFile As %String) As %String
     {
         Set tSC = $$$OK
 
         Try {
             Set tSC = ..BuildConnection(pTarget, .pDestConn)
-
             set stream = ##class(%Stream.FileBinary).%New()
             do stream.LinkToFile(pSourceFile)
             while 'stream.AtEnd {
+                // Adjust this if you want better performance.
                 set chunk = stream.Read($$$MaxStringLength/3)
-                do pDestConn.ClassMethodVoid("ZMSP.Mirror", "WriteBinary", pTargetFile, chunk)
+                do pDestConn.ClassMethodVoid("ZMSP.SuperServer", "WriteBinary", pTargetFile, chunk)
             }
 
         }
@@ -133,29 +131,9 @@ Class ZMSP.SuperServer
 
         }
 
-        Quit tSC
+        Quit "Trasfer Initiated"
     }
 
-    /*
-    /// Target Connection to Target
-    /// ("mirrora","/data/sys/hssys/mgr/MIRROR.DAT", "/data/sys/hssys/mgr/MIRROR.DAT")
-    ClassMethod Transfer(host, hostfile, localfile) As %Status
-    {
-        Set tSC = $$$OK
-        //set s=##class(%Stream.FileBinary).%New()
-        set host=host,port=1972,namespace="%SYS",user="intersystems"
-        set connection = ##class(%Net.DB.DataSource).CreateConnection(host, port, namespace, user, user)
-        set iris = connection.CreateIris()
-        
-        set stream = ##class(%Stream.FileBinary).%New()
-        do stream.LinkToFile(hostfile)
-        while 'stream.AtEnd {
-            set chunk = stream.Read($$$MaxStringLength/3)
-            do iris.ClassMethodVoid("ZMSP.Mirror", "WriteBinary", localfile, chunk)
-        }
-        Quit tSC
-    }
-    */
 
     ClassMethod WriteBinary(pFile As %String, pString As %String)
     {

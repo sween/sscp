@@ -14,7 +14,7 @@
       </Author>
       <Packaging>module</Packaging>
       <SourcesRoot>src</SourcesRoot>
-      <Resource Name="ZMSPMIRROR.PKG"/>
+      <Resource Name="ZMSP.PKG"/>
     </Module>
   </Document>
 </Export>
