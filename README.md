@@ -69,6 +69,9 @@ Credit:
 
 Yeah I dunno... Most of the transfers in production use are under 100MB at the moment (HSSYS out of the box is around 22MB), but the only other benchmark I can share is some stuff that was around 800MB and took about a minute and a half traversing the internet.
 
+## Troubleshooting
+
+The app logs to messages.log on both sides loosely.
 
 ## Definitive RoadMap
 
