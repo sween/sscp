@@ -1,4 +1,4 @@
-# InterSystems Superserver Copy
+# InterSystems SuperServer Copy
 File Transfer over the InterSystems IRIS SuperServer.
 
 ## Why
