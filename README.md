@@ -21,7 +21,7 @@ So, to transfer an IRIS.DAT file from host `fhirwatch-pop-os` (laptop) to remote
 ```
 Set tSC = ##class(ZMSP.SuperServer).Copy("_SYSTEM:SYS@fhirwatch-pop-os:1972@%SYS:/tmp/source.dat","kmitnick:12345@target-host:1972@SDOH:/tmp/destination.dat")
 ```
-<img src="https://github.com/sween/sscpraw/main/assets/sscp_server2server.png" alt="Server to Server Transfer">
+<img src="https://github.com/sween/sscp/raw/main/assets/sscp_server2server.png" alt="Server to Server Transfer">
 
 Do I have to be on the instances I am transferring files across?  Nope.
 
@@ -30,7 +30,7 @@ Let's say you've loaded the ipm package on your laptop, container, or toaster ru
 ```
 Set tSC = ##class(ZMSP.SuperServer).Copy("_SYSTEM:SYS@remote-host:1972@%SYS:/tmp/source.dat","kmitnick:12345@target-host:1972@SDOH:/tmp/destination.dat")
 ```
-<img src="https://github.com/sween/sscpraw/main/assets/sscp_thidpartyinitiator.png" alt="Third Party Initiator">
+<img src="https://github.com/sween/sscp/raw/main/assets/sscp_thidpartyinitiator.png" alt="Third Party Initiator">
 
 ## Use Cases
 
@@ -49,7 +49,7 @@ One of the benefits here of keeping this operation in house is it is now auditab
 5. Set Event Name: SSCP
 6. Press Save
 
-<img src="https://github.com/sween/sscpraw/main/assets/sscp_auditevent.png" alt="Create Audit Event">
+<img src="https://github.com/sween/sscp/raw/main/assets/sscp_auditevent.png" alt="Create Audit Event">
 
 Then, after your $$$OK, you can do:
 
@@ -59,7 +59,7 @@ Set tSC = $SYSTEM.Security.Audit("sscp","File Transfer", "ConfigurationChange","
 
 Which results in something like:
 
-<img src="https://github.com/sween/sscpraw/main/assets/sscp_loggedauditevent.png" alt="Logged Audit Event">
+<img src="https://github.com/sween/sscp/raw/main/assets/sscp_loggedauditevent.png" alt="Logged Audit Event">
 
 Credit:
 [@Yuri.Gomes - Leveraging Audit Database]:https://community.intersystems.com/post/leveraging-audit-database
