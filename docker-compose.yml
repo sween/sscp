@@ -12,8 +12,13 @@ services:
     volumes:
       - ./:/home/irisowner/dev
       - ./iris1:/iris1
+<<<<<<< Updated upstream
     hostname: iris1  
     
+=======
+    hostname: iris1
+ 
+>>>>>>> Stashed changes
   iris2:
     build:
       context: .
@@ -26,5 +31,9 @@ services:
     volumes:
       - ./:/home/irisowner/dev
       - ./iris2:/iris2
+<<<<<<< Updated upstream
     hostname: iris2      
     
+=======
+    hostname: iris2 
+>>>>>>> Stashed changes

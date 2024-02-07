@@ -1,13 +1,24 @@
     zn "%SYS"
 
     // Unexpire passwords and set up passwordless mode to simplify dev use.
+<<<<<<< Updated upstream
     // ** Comment out these two lines for Production use **
+=======
+    // ** Comment out these two line for Production use **
+>>>>>>> Stashed changes
     do ##class(Security.Users).UnExpireUserPasswords("*")
     zpm "install passwordless"
 
     zn "USER"
+<<<<<<< Updated upstream
 // Create /_vscode web app to support intersystems-community.testingmanager VS Code extension
     zpm "install vscode-per-namespace-settings"
     zpm "install webterminal"
+=======
+
+    // Create /_vscode web app to support intersystems-community.testingmanager VS Code extension
+    zpm "install vscode-per-namespace-settings"
+
+>>>>>>> Stashed changes
     zpm "load /home/irisowner/dev/ -v":1
     halt
