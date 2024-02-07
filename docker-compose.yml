@@ -1,0 +1,30 @@
+version: '3.6'
+services:
+  iris1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    command: --check-caps false --ISCAgent false
+    ports:
+      - 41773:1972
+      - 42773:52773
+    volumes:
+      - ./:/home/irisowner/dev
+      - ./iris1:/iris1
+    hostname: iris1  
+    
+  iris2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    command: --check-caps false --ISCAgent false
+    ports:
+      - 41663:1972
+      - 42663:52773
+    volumes:
+      - ./:/home/irisowner/dev
+      - ./iris2:/iris2
+    hostname: iris2      
+    
