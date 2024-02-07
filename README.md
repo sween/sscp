@@ -109,7 +109,7 @@ Test from docker console
 $ docker-compose exec iris1 iris session iris
 USER>
 ```
-Now copy /iris1/TESTA from container iris1 to /iris2/copyTESTA.txt of container iris2   
+Now copy /iris1/TESTA from container **iris1** to /iris2/copyTESTA.txt of container **iris2**   
 and watch the result in the related subdirectory or your installation      
 ```
 Set tSC=##class(ZMSP.SuperServer).Copy("_SYSTEM:SYS@iris1:1972@USER:/iris1/TESTA.txt","_SYSTEM:SYS@iris2:1972@USER:/iris2/copyTESTA.txt")
