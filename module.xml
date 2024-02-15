@@ -3,7 +3,7 @@
   <Document name="sscp.ZPM">
     <Module>
       <Name>sscp</Name>
-      <Version>0.0.1</Version>
+      <Version>0.0.2</Version>
       <Description>File Transfer over the InterSystems IRIS SuperServer</Description>
       <Keywords>Copy Files, Secure Copy</Keywords>
       <ExternalName>InterSystems Super Server Copy</ExternalName>
