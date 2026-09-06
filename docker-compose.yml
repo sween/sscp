@@ -12,13 +12,8 @@ services:
     volumes:
       - ./:/home/irisowner/dev
       - ./iris1:/iris1
-<<<<<<< Updated upstream
-    hostname: iris1  
-    
-=======
     hostname: iris1
- 
->>>>>>> Stashed changes
+
   iris2:
     build:
       context: .
@@ -31,9 +26,20 @@ services:
     volumes:
       - ./:/home/irisowner/dev
       - ./iris2:/iris2
-<<<<<<< Updated upstream
-    hostname: iris2      
-    
-=======
-    hostname: iris2 
->>>>>>> Stashed changes
+    hostname: iris2
+
+  go-sscp:
+    build:
+      context: ./go-sscp
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      - SSCP_SOURCE=_SYSTEM:SYS@iris1:1972@USER:/iris1/TESTA.txt
+      - SSCP_TARGET=_SYSTEM:SYS@iris2:1972@USER:/iris2/copyTESTA.txt
+      - SSCP_INTERVAL=5s
+      - SSCP_MODE=out-of-band
+    depends_on:
+      - iris1
+      - iris2
+
+

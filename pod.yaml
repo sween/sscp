@@ -1,0 +1,64 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sscp-pod
+  labels:
+    app: sscp
+spec:
+  containers:
+    - name: iris1
+      image: iris1:latest
+      imagePullPolicy: IfNotPresent
+      args:
+        - "--check-caps"
+        - "false"
+        - "--ISCAgent"
+        - "false"
+      ports:
+        - containerPort: 1972
+          name: superserver
+        - containerPort: 52773
+          name: mgmt-portal
+      volumeMounts:
+        - name: iris1-storage
+          mountPath: /iris1
+
+    - name: iris2
+      image: iris2:latest
+      imagePullPolicy: IfNotPresent
+      args:
+        - "--check-caps"
+        - "false"
+        - "--ISCAgent"
+        - "false"
+      ports:
+        - containerPort: 1972
+          name: superserver
+        - containerPort: 52773
+          name: mgmt-portal
+      volumeMounts:
+        - name: iris2-storage
+          mountPath: /iris2
+
+    - name: go-sscp
+      image: go-sscp:latest
+      imagePullPolicy: IfNotPresent
+      env:
+        - name: SSCP_SOURCE
+          value: "_SYSTEM:SYS@iris1:1972@USER:/iris1/TESTA.txt"
+        - name: SSCP_TARGET
+          value: "_SYSTEM:SYS@iris2:1972@USER:/iris2/copyTESTA.txt"
+        - name: SSCP_INTERVAL
+          value: "5s"
+        - name: SSCP_MODE
+          value: "out-of-band"
+
+  volumes:
+    - name: iris1-storage
+      hostPath:
+        path: /tmp/iris1
+        type: DirectoryOrCreate
+    - name: iris2-storage
+      hostPath:
+        path: /tmp/iris2
+        type: DirectoryOrCreate

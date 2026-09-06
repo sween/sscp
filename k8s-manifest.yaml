@@ -1,0 +1,117 @@
+---
+# IRIS 1 Deployment & Service
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: iris1
+  labels:
+    app: iris1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: iris1
+  template:
+    metadata:
+      labels:
+        app: iris1
+    spec:
+      containers:
+        - name: iris1
+          image: iris1:latest
+          imagePullPolicy: IfNotPresent
+          args: ["--check-caps", "false", "--ISCAgent", "false"]
+          ports:
+            - containerPort: 1972
+              name: superserver
+            - containerPort: 52773
+              name: mgmt-portal
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: iris1
+spec:
+  selector:
+    app: iris1
+  ports:
+    - name: superserver
+      port: 1972
+      targetPort: 1972
+    - name: mgmt-portal
+      port: 52773
+      targetPort: 52773
+---
+# IRIS 2 Deployment & Service
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: iris2
+  labels:
+    app: iris2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: iris2
+  template:
+    metadata:
+      labels:
+        app: iris2
+    spec:
+      containers:
+        - name: iris2
+          image: iris2:latest
+          imagePullPolicy: IfNotPresent
+          args: ["--check-caps", "false", "--ISCAgent", "false"]
+          ports:
+            - containerPort: 1972
+              name: superserver
+            - containerPort: 52773
+              name: mgmt-portal
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: iris2
+spec:
+  selector:
+    app: iris2
+  ports:
+    - name: superserver
+      port: 1972
+      targetPort: 1972
+    - name: mgmt-portal
+      port: 52773
+      targetPort: 52773
+---
+# go-sscp Workload Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-sscp
+  labels:
+    app: go-sscp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: go-sscp
+  template:
+    metadata:
+      labels:
+        app: go-sscp
+    spec:
+      containers:
+        - name: go-sscp
+          image: go-sscp:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: SSCP_SOURCE
+              value: "_SYSTEM:SYS@iris1:1972@USER:/iris1/TESTA.txt"
+            - name: SSCP_TARGET
+              value: "_SYSTEM:SYS@iris2:1972@USER:/iris2/copyTESTA.txt"
+            - name: SSCP_INTERVAL
+              value: "5s"
+            - name: SSCP_MODE
+              value: "out-of-band"
